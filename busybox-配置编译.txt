@@ -1,0 +1,19 @@
+配置编译busybox
+
+1,解压 busybox-1.7.0.tar.bz2
+
+2,cd busybox-1.7.0
+
+3,修改Makefile
+	一，+176 CROSS_COMPILE   ?=arm-linux-
+	二，-405 #config %config: scripts_basic outputmakefile FORCE
+		+406 %config: scripts_basic outputmakefile FORCE
+
+4,make menuconfig
+	类似kernel编译， 添加busybox配置
+	
+5,make
+	编译busybox
+	
+3,make CONFIG_PREFIX=/work/nfs_root/first_fs install
+	安装编译好的busybox文件到 /work/nfs_root/first_fs, 不要直接使用make install，会覆盖掉系统内部的文件系统
